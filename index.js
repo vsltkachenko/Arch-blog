@@ -77,7 +77,7 @@ app.post('/upload', checkAuth, upload.single('image'), (req, res) => {
 
 app.get('/api/posts', PostController.getAll)
 // app.get('/posts/tags', PostController.getLastTags)
-app.get('/posts/:id', PostController.getOne)
+app.get('/api/posts/:id', PostController.getOne)
 app.post(
 	'/api/posts',
 	checkAuth,
