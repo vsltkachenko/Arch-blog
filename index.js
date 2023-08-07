@@ -53,6 +53,7 @@ const upload = multer({ storage })
 app.use(express.json())
 app.use(cors())
 app.use(express.static(path.join(__dirname, './client/build')))
+app.use('/api/uploads', express.static('uploads'))
 app.use('/uploads', express.static('uploads'))
 
 app.post(
@@ -69,7 +70,7 @@ app.post(
 )
 app.get('/api/auth/me', checkAuth, UserController.getMe)
 
-app.post('/upload', checkAuth, upload.single('image'), (req, res) => {
+app.post('/api/upload', checkAuth, upload.single('image'), (req, res) => {
 	res.json({
 		url: `/uploads/${req.file.originalname}`,
 	})
