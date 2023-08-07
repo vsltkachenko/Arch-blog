@@ -52,7 +52,7 @@ const upload = multer({ storage })
 
 app.use(express.json())
 app.use(cors())
-app.use(express.static(path.json(__dirname, './client/build')))
+app.use(express.static(path.join(__dirname, './client/build')))
 app.use('/uploads', express.static('uploads'))
 
 app.post(
@@ -101,7 +101,7 @@ app.get('/api/posts/comments/:id', CommentController.getPostComments)
 app.get('/api/lastcomments', CommentController.getLastComments)
 
 app.get('*', function(req, res) {
-	res.sendFile(path.json(__dirname, './client/build/index.html'))
+	res.sendFile(path.join(__dirname, './client/build/index.html'))
 })
 
 app.listen(PORT || 4444, (err) => {
