@@ -125,14 +125,14 @@ export const update = async (req, res) => {
 
 export const getLastTags = async (req, res) => {
 	try {
-		const posts = await PostModel.find().limit(5).exec()
+		// const posts = await PostModel.find().limit(5).exec()
 
-		const tags = Array.from(
-			new Set(
-				posts.map((post) => post.tags).flat()
-				// .slice(0, 5)
-			)
-		)
+		// const tags = Array.from(
+		// 	new Set(
+		// 		posts.map((post) => post.tags).flat()
+		// 		// .slice(0, 5)
+		// 	)
+		// )
 		const text = 'Ntcn TEST'
 
 		res.json({ text })
