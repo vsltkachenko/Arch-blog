@@ -48,7 +48,7 @@ app.use(express.json())
 app.use(cors())
 
 app.use(express.static(path.join(__dirname, './client/build')))
-app.use('/uploads', express.static(path.join(__dirname, './client/build/uploads')))
+// app.use('/uploads', express.static(path.join(__dirname, './client/build/uploads')))
 
 //Routs
 app.use('/api/auth', authRoute)
