@@ -53,19 +53,11 @@ export const Post = ({
 					</IconButton>
 				</div>
 			)}
-			{imageUrl && (
-				<img
-					className={clsx(styles.image, { [styles.imageFull]: isFullPost })}
-					src={imageUrl}
-					alt={title}
-				/>
-			)}
+			{imageUrl && <img className={clsx(styles.image, { [styles.imageFull]: isFullPost })} src={imageUrl} alt={title} />}
 			<div className={styles.wrapper}>
 				<UserInfo {...user} additionalText={createdAt} />
 				<div className={styles.indention}>
-					<h2
-						className={clsx(styles.title, { [styles.titleFull]: isFullPost })}
-					>
+					<h2 className={clsx(styles.title, { [styles.titleFull]: isFullPost })}>
 						{isFullPost ? title : <Link to={`/posts/${id}`}>{title}</Link>}
 					</h2>
 					<ul className={styles.tags}>
