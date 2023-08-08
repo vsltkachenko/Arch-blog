@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { CommentController } from '../controllers'
+import * as  CommentController  from '../controllers/CommentController.js'
 import { checkAuth } from '../utils'
 const router = new Router()
 

@@ -1,5 +1,6 @@
 import { Router } from 'express'
-import { CommentController, PostController } from '../controllers'
+import * as PostController from '../controllers/PostController.js'
+import * as CommentController from '../controllers/CommentController.js'
 import { checkAuth, handleValidationErrors } from '../utils'
 import { postCreateValidation } from '../validations.js'
 

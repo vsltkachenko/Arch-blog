@@ -1,8 +1,8 @@
 import { Router } from 'express'
 import { loginValidation, registerValidation } from '../validations.js'
-import { UserController } from '../controllers'
 import { checkAuth } from '../utils/checkAuth.js'
 import { handleValidationErrors } from '../utils/handleValidationErrors.js'
+import * as UserController from '../controllers/UserController.js'
 
 const router = new Router()
 
