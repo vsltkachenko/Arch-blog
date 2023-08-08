@@ -10,8 +10,7 @@ import { fileURLToPath } from 'url'
 import authRoute from './routes/auth.js'
 import postRoute from './routes/posts.js'
 import commentRoute from './routes/comments.js'
-
-import { checkAuth } from './utils/index.js'
+import { checkAuth } from './utils/checkAuth.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
