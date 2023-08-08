@@ -1,8 +1,9 @@
 import { Router } from 'express'
 import * as PostController from '../controllers/PostController.js'
 import * as CommentController from '../controllers/CommentController.js'
-import { checkAuth, handleValidationErrors } from '../utils'
 import { postCreateValidation } from '../validations.js'
+import { checkAuth } from '../utils/checkAuth.js'
+import { handleValidationErrors } from '../utils/handleValidationErrors.js'
 
 // Get All Posts
 // http://localhost:8080/api/posts
