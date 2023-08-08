@@ -9,6 +9,7 @@ import { fileURLToPath } from 'url'
 
 import authRoute from './routes/auth.js'
 import postRoute from './routes/posts.js'
+import tagsRoute from './routes/tags.js'
 import commentRoute from './routes/comments.js'
 import { checkAuth } from './utils/checkAuth.js'
 
@@ -50,6 +51,7 @@ app.use('/uploads', express.static('uploads'))
 //Routs
 app.use('/api/auth', authRoute)
 app.use('/api/posts', postRoute)
+app.use('/api/tags', tagsRoute)
 app.use('/api/comments', commentRoute)
 
 app.post('/api/upload', checkAuth, upload.single('image'), (req, res) => {
