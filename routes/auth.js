@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { loginValidation, registerValidation } from '../validations'
+import { loginValidation, registerValidation } from '../validations.js'
 import { checkAuth, handleValidationErrors } from '../utils'
 import { UserController } from '../controllers'
 
