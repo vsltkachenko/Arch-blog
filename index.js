@@ -19,6 +19,7 @@ const __dirname = path.dirname(__filename)
 
 const app = express()
 dotenv.config()
+app.use(fileupload({}))
 
 const PORT = process.env.PORT
 const URL = process.env.URL
@@ -45,7 +46,6 @@ mongoose
 
 app.use(express.json())
 app.use(cors())
-app.use(fileupload({}))
 
 app.use(express.static(path.join(__dirname, './client/build')))
 app.use('/uploads', express.static(path.join(__dirname, './client/build/uploads')))
@@ -62,14 +62,14 @@ app.use('/api/comments', commentRoute)
 // 	})
 // })
 app.post('/api/upload', checkAuth, (req, res) => {
-	if (req.files) {
+	if (!req.files) {
 		return res.status(400).json({ msg: 'No file uploaded' })
 	}
 	const file = req.files.image
 	if (!file) return res.json({ error: 'Incorrect input name' })
 	// const newFileName = encodeURI(Date.now() + '-' + file.name)
 	const newFileName = encodeURI(file.name)
-	file.mv(`${__dirname}/client/build/uploads/${newFileName}`, err => {
+	file.mv(`${__dirname}/client/build/uploads/${newFileName}`, (err) => {
 		if (err) {
 			return res.status(500).send(err)
 		}
