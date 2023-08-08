@@ -2,15 +2,8 @@ import PostModel from '../models/Post.js'
 
 export const getAll = async (req, res) => {
 	try {
-		const posts = await PostModel.find()
-			.sort('-createdAt')
-			.populate('user')
-			.exec()
-		const popularPosts = await PostModel.find()
-			.sort('-viewsCount')
-			.limit(3)
-			.populate('user')
-			.exec()
+		const posts = await PostModel.find().sort('-createdAt').populate('user').exec()
+		const popularPosts = await PostModel.find().sort('-viewsCount').limit(3).populate('user').exec()
 
 		res.json({ posts, popularPosts })
 	} catch (error) {
@@ -52,6 +45,7 @@ export const remove = async (req, res) => {
 		})
 	}
 }
+
 export const getOne = async (req, res) => {
 	try {
 		const postId = req.params.id
@@ -117,10 +111,7 @@ export const update = async (req, res) => {
 	try {
 		const postId = req.params.id
 		const { title, text, imageUrl, tags } = req.body
-		await PostModel.findOneAndUpdate(
-			{ _id: postId },
-			{ title, text, imageUrl, tags, user: req.userId }
-		)
+		await PostModel.findOneAndUpdate({ _id: postId }, { title, text, imageUrl, tags, user: req.userId })
 		res.json({
 			message: 'Пост оновлено!',
 		})

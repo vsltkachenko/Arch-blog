@@ -7,19 +7,11 @@ import mongoose from 'mongoose'
 import path from 'path'
 import { fileURLToPath } from 'url'
 
-import {
-	registerValidation,
-	loginValidation,
-	postCreateValidation,
-} from './validations.js'
+import authRoute from './routes/auth.js'
+import postRoute from './routes/posts.js'
+import commentRoute from './routes/comments.js'
 
-import { handleValidationErrors, checkAuth } from './utils/index.js'
-
-import {
-	UserController,
-	PostController,
-	CommentController,
-} from './controllers/index.js'
+import { checkAuth } from './utils/index.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -56,19 +48,10 @@ app.use(express.static(path.join(__dirname, './client/build')))
 app.use('/api/uploads', express.static('uploads'))
 app.use('/uploads', express.static('uploads'))
 
-app.post(
-	'/api/auth/login',
-	loginValidation,
-	handleValidationErrors,
-	UserController.login
-)
-app.post(
-	'/api/auth/register',
-	registerValidation,
-	handleValidationErrors,
-	UserController.register
-)
-app.get('/api/auth/me', checkAuth, UserController.getMe)
+//Routs
+app.use('/api/auth', authRoute)
+app.use('/api/posts', postRoute)
+app.use('/api/comments', commentRoute)
 
 app.post('/api/upload', checkAuth, upload.single('image'), (req, res) => {
 	res.json({
@@ -76,32 +59,7 @@ app.post('/api/upload', checkAuth, upload.single('image'), (req, res) => {
 	})
 })
 
-app.get('/api/posts', PostController.getAll)
-// app.get('/posts/tags', PostController.getLastTags)
-app.get('/api/posts/:id', PostController.getOne)
-app.post(
-	'/api/posts',
-	checkAuth,
-	postCreateValidation,
-	handleValidationErrors,
-	PostController.create
-)
-app.delete('/api/posts/:id', checkAuth, PostController.remove)
-app.patch(
-	'/api/posts/:id',
-	checkAuth,
-	postCreateValidation,
-	handleValidationErrors,
-	PostController.update
-)
-app.get('/api/tags', PostController.getLastTags)
-
-// Comments
-app.post('/api/comments/:id', checkAuth, CommentController.createPostComment)
-app.get('/api/posts/comments/:id', CommentController.getPostComments)
-app.get('/api/lastcomments', CommentController.getLastComments)
-
-app.get('*', function(req, res) {
+app.get('*', function (req, res) {
 	res.sendFile(path.join(__dirname, './client/build/index.html'))
 })
 
