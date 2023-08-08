@@ -5,6 +5,8 @@ import { postCreateValidation } from '../validations.js'
 import { checkAuth } from '../utils/checkAuth.js'
 import { handleValidationErrors } from '../utils/handleValidationErrors.js'
 
+const router = new Router()
+
 // Get All Posts
 // http://localhost:8080/api/posts
 router.get('/', PostController.getAll)
@@ -33,4 +35,6 @@ router.get('/tags', PostController.getLastTags)
 // http://localhost:8080/api/posts
 router.get('/lastcomments', CommentController.getPostComments)
 
-const router = new Router()
+export default router
+
+
