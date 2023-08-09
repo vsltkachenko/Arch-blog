@@ -29,7 +29,6 @@ mongoose
 	.connect(URL)
 	.then(() => console.log('DB ok'))
 	.catch((err) => console.log('DB error', err))
-	
 
 // const storage = multer.diskStorage({
 // 	destination: (_, __, cb) => {
