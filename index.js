@@ -4,7 +4,7 @@ import cors from 'cors'
 import mongoose from 'mongoose'
 import path from 'path'
 import fileupload from 'express-fileupload'
-
+import { fileURLToPath } from 'url'
 import authRoute from './routes/auth.js'
 import postRoute from './routes/posts.js'
 import tagsRoute from './routes/tags.js'
