@@ -9,8 +9,7 @@ import authRoute from './routes/auth.js'
 import postRoute from './routes/posts.js'
 import tagsRoute from './routes/tags.js'
 import commentRoute from './routes/comments.js'
-import { checkAuth } from './utils/checkAuth.js'
-import { uploadFile } from './utils/uploadFile.js'
+import uploadRoute from './routes/upload.js'
 
 const app = express()
 dotenv.config()
@@ -30,8 +29,7 @@ app.use('/api/auth', authRoute)
 app.use('/api/posts', postRoute)
 app.use('/api/tags', tagsRoute)
 app.use('/api/comments', commentRoute)
-
-app.post('/api/upload', checkAuth, uploadFile)
+app.use('/api/upload', uploadRoute)
 
 app.get('*', function (req, res) {
 	res.sendFile(path.join(__dirname, './client/build/index.html'))
