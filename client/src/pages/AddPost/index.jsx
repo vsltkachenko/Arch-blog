@@ -38,18 +38,23 @@ export const AddPost = () => {
 		fetchData()
 	}, [isEditing, id])
 
-	const handleChangeFile = async (event) => {
-		// console.log(event.target.files)
+	const uploadImage = async (event) => {
 		try {
 			const formData = new FormData()
-			const file = event.target.files[0]
-			formData.append('image', file)
-			const { data } = await axios.post('/upload', formData)
-			// console.log('data:', data)
+			const image = event.target.files[0]
+			formData.append('file', image)
+			formData.append('upload_preset', 'storage')
+			formData.append('cloud_name', '')
+
+			const response = await fetch('https://api.cloudinary.com/v1_1/drsg1vkkx/image/upload', {
+				method: 'post',
+				body: formData,
+			})
+			const data = await response.json()
 			setImageUrl(data.url)
 		} catch (error) {
-			console.warn(error)
-			alert('ПОмилка при завантаженні файлу')
+			console.log(error)
+			alert('Помилка при завантаженні файлу')
 		}
 	}
 
@@ -107,7 +112,7 @@ export const AddPost = () => {
 			<Button onClick={() => inputFileRef.current.click()} variant='outlined' size='large'>
 				{isEditing ? 'Змінити зображення' : 'Додати зображення'}
 			</Button>
-			<input ref={inputFileRef} type='file' onChange={handleChangeFile} hidden />
+			<input ref={inputFileRef} type='file' onChange={uploadImage} hidden />
 			{imageUrl && (
 				<>
 					<Button variant='contained' color='error' onClick={onClickRemoveImage}>
